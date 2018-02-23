@@ -18,12 +18,13 @@ public class AppContext extends Application {
     private DaoMaster mDaoMaster;
     private DaoSession mDaoSession;
 
-    public static AppContext instance;
+    private static AppContext instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+        setDataBase();
     }
 
     public static AppContext getInstance(){

@@ -21,7 +21,7 @@ public class RequestParamInterceptor implements Interceptor {
                 .scheme(oldRequest.url().scheme())
                 .host(oldRequest.url().host());
         Request newRequest = oldRequest.newBuilder()
-                .addHeader("Authorization", Constant.TOKEN)
+                .addHeader("Authorization", Constant.TOKEN)//添加头部额外信息
                 .method(oldRequest.method(), oldRequest.body())
                 .url(urlBuilder.build())
                 .build();

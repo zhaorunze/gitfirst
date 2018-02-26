@@ -9,19 +9,20 @@ import android.widget.EditText;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import zhaorunze.gittest.AppContext;
 import zhaorunze.gittest.R;
 import zhaorunze.gittest.adapter.ListUserAdapter;
+import zhaorunze.gittest.base.MVPActivity;
 import zhaorunze.gittest.config.Constant;
+import zhaorunze.gittest.contracts.MainActivityContract;
 import zhaorunze.gittest.entity.User;
+import zhaorunze.gittest.presenters.MainActivityPresenter;
 import zhaorunze.gittest.utils.ToastUtils;
 import zhaorunze.gittest.widgets.CircleImageView;
 
-public class MainActivity extends BaseActivity{
+public class MainActivity extends MVPActivity<MainActivityPresenter> implements MainActivityContract.View{
     @BindView(R.id.etName)
     EditText etName;
     @BindView(R.id.etSex)
@@ -40,6 +41,10 @@ public class MainActivity extends BaseActivity{
     }
 
     @Override
+    public MainActivityPresenter createPresenter() {
+        return new MainActivityPresenter(this);
+    }
+    @Override
     public void initView() {
         mUserAdapter = new ListUserAdapter(null);
         list.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false));
@@ -55,34 +60,24 @@ public class MainActivity extends BaseActivity{
         Glide.with(this).load(Constant.PIC_URL).into(imgCircle);
     }
 
+    @Override
+    public void insertUserFailure(String msg) {
+        ToastUtils.toastShort(this, msg);
+    }
+
+    @Override
+    public void insertUserSuccess(User user) {
+
+    }
+
     @OnClick(R.id.btAdd)
     void addUserClick(View view){
-        String name = etName.getText().toString().trim();
-        String sex = etSex.getText().toString().trim();
-        String age = etAge.getText().toString().trim();
-        if("".equals(name)){
-            ToastUtils.toastShort(this, "请输入用户名");
-            return;
-        }
-        if("".equals(sex)){
-            ToastUtils.toastShort(this, "请输入性别");
-            return;
-        }
-        if("".equals(age)){
-            ToastUtils.toastShort(this, "请输入年龄");
-            return;
-        }
-        User user = new User();
-        user.setName(name);
-        user.setSex(sex);
-        user.setAge(age);
-        AppContext.getInstance().getDaoSession().getUserDao().insert(user);
+        mPresenter.insertUser(etName.getText().toString().trim(), etSex.getText().toString().trim(),etAge.getText().toString().trim());
     }
 
     @OnClick(R.id.btQuery)
     void queryUserClick(View view){
-        List<User> users = AppContext.getInstance().getDaoSession().loadAll(User.class);
-        mUserAdapter.setNewData(users);
+        mUserAdapter.setNewData(mPresenter.loadAllUser());
     }
 
     @OnClick(R.id.btNext)

@@ -28,6 +28,5 @@ public class Constant {
         PICES.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1519624135592&di=d30b563a22a854816e4b30146b523a0c&imgtype=0&src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fitem%2F201608%2F28%2F20160828192053_EtKwj.jpeg");
         PICES.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1519624135591&di=d58ea8a87ac6e8e1540625ee91decd31&imgtype=0&src=http%3A%2F%2Fcdnq.duitang.com%2Fuploads%2Fitem%2F201502%2F25%2F20150225183017_zsFmx.jpeg");
         PICES.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1519624135590&di=48f14c4a84b2a6ce09a64cfd0262f268&imgtype=0&src=http%3A%2F%2Fwww.qq7c.com%2Fuploads%2Fallimg%2F161105%2Fco1611050P957-2.jpg");
-        PICES.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1519624251367&di=a5b2df9c3d14db47b1eb9011a62c2614&imgtype=0&src=http%3A%2F%2Fwww.laobanfa.com%2Fd%2Ffile%2Fpicture%2Ffengjie.jpg");
     }
 }

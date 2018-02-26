@@ -13,6 +13,7 @@ import zhaorunze.gittest.entity.GuideBean;
 public interface NextActivityContract {
     interface View extends BaseView{
         void loadGuideSuccess(GuideBean bean);
+        void loadGuideFailure();
     }
     interface Presenter extends BasePresenter{
         void loadGuide();

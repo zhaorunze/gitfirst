@@ -1,6 +1,7 @@
 package zhaorunze.gittest.ui.activity;
 
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,6 +27,8 @@ import zhaorunze.gittest.presenters.NextActivityPresenter;
 
 public class NextActivity extends MVPActivity<NextActivityPresenter> implements NextActivityContract.View{
 
+    @BindView(R.id.refreshLayout)
+    SwipeRefreshLayout refreshLayout;
     @BindView(R.id.tvShow)
     TextView tvShow;
     @BindView(R.id.viewPager)
@@ -51,6 +54,17 @@ public class NextActivity extends MVPActivity<NextActivityPresenter> implements 
         bannerComponent.setAdapter(bannerAdapter);
     }
 
+    @Override
+    public void initView() {
+        super.initView();
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.loadGuide();
+            }
+        });
+    }
+
     @OnClick(R.id.btLoad)
     void loadGuide(View view){
         mPresenter.loadGuide();
@@ -58,6 +72,12 @@ public class NextActivity extends MVPActivity<NextActivityPresenter> implements 
 
     @Override
     public void loadGuideSuccess(GuideBean bean) {
+        refreshLayout.setRefreshing(false);
         tvShow.setText(new Gson().toJson(bean));
+    }
+
+    @Override
+    public void loadGuideFailure() {
+        refreshLayout.setRefreshing(false);
     }
 }

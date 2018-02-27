@@ -6,8 +6,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.shizhefei.view.indicator.BannerComponent;
 import com.shizhefei.view.indicator.FixedIndicatorView;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -16,6 +19,7 @@ import zhaorunze.gittest.adapter.BannerAdapter;
 import zhaorunze.gittest.base.MVPActivity;
 import zhaorunze.gittest.config.Constant;
 import zhaorunze.gittest.contracts.NextActivityContract;
+import zhaorunze.gittest.entity.AreaBean;
 import zhaorunze.gittest.entity.GuideBean;
 import zhaorunze.gittest.presenters.NextActivityPresenter;
 
@@ -46,9 +50,11 @@ public class NextActivity extends MVPActivity<NextActivityPresenter> implements 
         return new NextActivityPresenter(this);
     }
 
+    Gson gson;
     @Override
     public void initData() {
         super.initData();
+        gson = new GsonBuilder().setPrettyPrinting().create();
         bannerComponent = new BannerComponent(fixedIndicatorView, viewPager, false);
         BannerAdapter bannerAdapter = new BannerAdapter(this, Constant.PICES);
         bannerComponent.setAdapter(bannerAdapter);
@@ -60,20 +66,37 @@ public class NextActivity extends MVPActivity<NextActivityPresenter> implements 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.loadGuide();
+//                mPresenter.loadGuide();
+                mPresenter.loadAreaList();
             }
         });
     }
 
+    @OnClick(R.id.btLoadAreaList)
+    void loadAreaList(View view){
+        mPresenter.loadAreaList();
+    }
+
+    @Override
+    public void loadAreaListSuccess(List<AreaBean> bean) {
+        refreshLayout.setRefreshing(false);
+        tvShow.setText(gson.toJson(bean));
+    }
+
+    @Override
+    public void loadAreaListFailure() {
+        refreshLayout.setRefreshing(false);
+    }
+
     @OnClick(R.id.btLoad)
     void loadGuide(View view){
-        mPresenter.loadGuide();
+//        mPresenter.loadGuide();
     }
 
     @Override
     public void loadGuideSuccess(GuideBean bean) {
         refreshLayout.setRefreshing(false);
-        tvShow.setText(new Gson().toJson(bean));
+        tvShow.setText(gson.toJson(bean));
     }
 
     @Override

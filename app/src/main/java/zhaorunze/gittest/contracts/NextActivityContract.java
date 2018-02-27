@@ -1,7 +1,10 @@
 package zhaorunze.gittest.contracts;
 
+import java.util.List;
+
 import zhaorunze.gittest.base.BasePresenter;
 import zhaorunze.gittest.base.BaseView;
+import zhaorunze.gittest.entity.AreaBean;
 import zhaorunze.gittest.entity.GuideBean;
 
 /**
@@ -14,8 +17,12 @@ public interface NextActivityContract {
     interface View extends BaseView{
         void loadGuideSuccess(GuideBean bean);
         void loadGuideFailure();
+        void loadAreaListFailure();
+        void loadAreaListSuccess(List<AreaBean> bean);
+
     }
     interface Presenter extends BasePresenter{
         void loadGuide();
+        void loadAreaList();
     }
 }

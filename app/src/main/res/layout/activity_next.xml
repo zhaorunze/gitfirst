@@ -28,11 +28,20 @@
         </RelativeLayout>
     </zhaorunze.gittest.widgets.VerticalSwipeRefreshLayout>
 
-    <TextView
-        android:id="@+id/tvShow"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center" />
+        android:scrollbars="none">
+
+        <TextView
+            android:id="@+id/tvShow"
+            android:padding="10dp"
+            android:textColor="#900f"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|left" />
+
+    </ScrollView>
 
     <Button
         android:id="@+id/btLoad"
@@ -41,4 +50,14 @@
         android:layout_centerInParent="true"
         android:background="#0000"
         android:text="加载数据" />
+
+    <Button
+        android:id="@+id/btLoadAreaList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btLoad"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:background="#0000"
+        android:text="加载Area数据" />
 </RelativeLayout>

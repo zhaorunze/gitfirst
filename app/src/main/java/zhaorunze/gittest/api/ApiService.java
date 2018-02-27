@@ -2,6 +2,7 @@ package zhaorunze.gittest.api;
 
 import retrofit2.http.GET;
 import rx.Observable;
+import zhaorunze.gittest.entity.AreaListBean;
 import zhaorunze.gittest.entity.GuideBean;
 import zhaorunze.gittest.entity.ResponseBody;
 
@@ -15,4 +16,6 @@ public interface ApiService {
 
     @GET("home/start")
     Observable<ResponseBody<GuideBean>> loadGuide();
+    @GET("superadmin/listarea")
+    Observable<ResponseBody<AreaListBean>> loadAreaList();
 }

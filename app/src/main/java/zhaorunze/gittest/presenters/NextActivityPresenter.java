@@ -7,6 +7,7 @@ import zhaorunze.gittest.api.ApiSubscriber;
 import zhaorunze.gittest.api.RetrofitClient;
 import zhaorunze.gittest.base.CommonPresenter;
 import zhaorunze.gittest.contracts.NextActivityContract;
+import zhaorunze.gittest.entity.AreaListBean;
 import zhaorunze.gittest.entity.GuideBean;
 import zhaorunze.gittest.entity.ResponseBody;
 
@@ -45,6 +46,35 @@ public class NextActivityPresenter extends CommonPresenter implements NextActivi
             @Override
             public void onSuccess(GuideBean mode) {
                 mView.loadGuideSuccess(mode);
+            }
+
+            @Override
+            public void onFailure(int code, String msg) {
+                mView.showMsg(msg);
+            }
+        }));
+    }
+
+    @Override
+    public void loadAreaList() {
+        Observable<ResponseBody<AreaListBean>> observable = RetrofitClient.builderRetrofit().create(ApiService.class).loadAreaList();
+        addIOSubscription(observable, new ApiSubscriber(new ApiCallBack<AreaListBean>() {
+
+            @Override
+            public void onStart() {
+                super.onStart();
+                mView.showLoadingDialog();
+            }
+
+            @Override
+            public void onCompleted() {
+                super.onCompleted();
+                mView.dismissLoadingDialog();
+            }
+
+            @Override
+            public void onSuccess(AreaListBean mode) {
+                mView.loadAreaListSuccess(mode.getAreaList());
             }
 
             @Override

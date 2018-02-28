@@ -24,8 +24,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         super.onCreate(savedInstanceState);
         setContentView(getContent());
         unbinder = ButterKnife.bind(this);
-        initData();
         initView();
+        initData();
         initAction();
     }
 

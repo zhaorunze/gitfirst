@@ -1,5 +1,6 @@
 package zhaorunze.gittest.ui.activity;
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
@@ -91,6 +92,8 @@ public class NextActivity extends MVPActivity<NextActivityPresenter> implements 
     @OnClick(R.id.btLoad)
     void loadGuide(View view){
 //        mPresenter.loadGuide();
+        Intent intent = new Intent(this, AreaListActivity.class);
+        startActivity(intent);
     }
 
     @Override

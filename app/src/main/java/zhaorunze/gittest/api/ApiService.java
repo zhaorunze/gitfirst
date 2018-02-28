@@ -1,6 +1,7 @@
 package zhaorunze.gittest.api;
 
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 import rx.Observable;
 import zhaorunze.gittest.entity.AreaListBean;
 import zhaorunze.gittest.entity.GuideBean;
@@ -18,4 +19,6 @@ public interface ApiService {
     Observable<ResponseBody<GuideBean>> loadGuide();
     @GET("superadmin/listarea")
     Observable<ResponseBody<AreaListBean>> loadAreaList();
+    @GET("superadmin/listareapage")
+    Observable<ResponseBody<AreaListBean>> loadAreaPage(@Query("areaid") int areaid, @Query("limit") int limit);
 }

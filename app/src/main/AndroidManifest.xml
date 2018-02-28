@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.NextActivity" />
+        <activity android:name=".ui.activity.AreaListActivity" />
     </application>
 
 </manifest>

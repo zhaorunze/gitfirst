@@ -1,12 +1,14 @@
 package zhaorunze.gittest.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by zhaorunze on
  * 2018/2/27 15:07
  * E-Mail Address：1159963642@qq.com
  */
 
-public class AreaBean {
+public class AreaBean implements Serializable{
     private Integer areaId;
     private String areaName;
     private Integer priority;
@@ -51,5 +53,14 @@ public class AreaBean {
 
     public void setLastEditTime(Long lastEditTime) {
         this.lastEditTime = lastEditTime;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null && obj instanceof AreaBean) {
+            AreaBean other = (AreaBean) obj;
+            return this.areaId.equals(other.areaId);
+        }
+        return false;
     }
 }

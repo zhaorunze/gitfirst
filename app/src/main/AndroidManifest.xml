@@ -23,7 +23,8 @@
         </activity>
         <activity android:name=".ui.activity.NextActivity" />
         <activity android:name=".ui.activity.AreaListActivity" />
-        <activity android:name=".ui.activity.ListAreaActivity"/>
+        <activity android:name=".ui.activity.ListAreaActivity" />
+        <activity android:name=".ui.activity.UpdateAreaActivity"></activity>
     </application>
 
 </manifest>

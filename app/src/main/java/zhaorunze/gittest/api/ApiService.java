@@ -1,6 +1,9 @@
 package zhaorunze.gittest.api;
 
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
 import zhaorunze.gittest.entity.AreaListBean;
@@ -21,4 +24,12 @@ public interface ApiService {
     Observable<ResponseBody<AreaListBean>> loadAreaList();
     @GET("superadmin/listareapage")
     Observable<ResponseBody<AreaListBean>> loadAreaPage(@Query("areaid") int areaid, @Query("limit") int limit);
+    @GET("superadmin/removearea")
+    Observable<ResponseBody> deleteArea(@Query("areaid") int areaid);
+
+    @POST("superadmin/addarea")
+    Observable<ResponseBody> addArea(@Body RequestBody body);
+
+    @POST("superadmin/modifyarea")
+    Observable<ResponseBody> updateArea(@Body RequestBody body);
 }

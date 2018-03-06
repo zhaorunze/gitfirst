@@ -1,61 +1,37 @@
 package zhaorunze.gittest.presenters;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import rx.Observable;
 import zhaorunze.gittest.api.ApiCallBack;
 import zhaorunze.gittest.api.ApiService;
 import zhaorunze.gittest.api.ApiSubscriber;
 import zhaorunze.gittest.api.RetrofitClient;
 import zhaorunze.gittest.base.CommonPresenter;
-import zhaorunze.gittest.contracts.ListAreaActivityContract;
+import zhaorunze.gittest.contracts.UpdateAreaActivityContract;
 import zhaorunze.gittest.entity.AreaBean;
-import zhaorunze.gittest.entity.AreaListBean;
 import zhaorunze.gittest.entity.ResponseBody;
 
 /**
  * Created by zhaorunze on
- * 2018/3/6 11:34
+ * 2018/3/6 15:22
  * E-Mail Address：1159963642@qq.com
  */
 
-public class ListAreaActivityPresenter extends CommonPresenter implements ListAreaActivityContract.Presenter {
-    private ListAreaActivityContract.View mView;
-    public ListAreaActivityPresenter(ListAreaActivityContract.View mView){
+public class UpdateAreaActivityPresenter extends CommonPresenter implements UpdateAreaActivityContract.Presenter {
+
+    private Gson gson = new GsonBuilder().create();
+    private UpdateAreaActivityContract.View mView;
+    public UpdateAreaActivityPresenter(UpdateAreaActivityContract.View mView){
         this.mView = mView;
     }
-
     @Override
-    public void loadAreaList() {
-        Observable<ResponseBody<AreaListBean>> observable = RetrofitClient.builderRetrofit().create(ApiService.class)
-                .loadAreaList();
-        addIOSubscription(observable, new ApiSubscriber(new ApiCallBack<AreaListBean>() {
-
-            @Override
-            public void onStart() {
-                super.onStart();
-                mView.showLoadingDialog();
-            }
-
-            @Override
-            public void onCompleted() {
-                super.onCompleted();
-                mView.dismissLoadingDialog();
-            }
-
-            @Override
-            public void onSuccess(AreaListBean mode) {
-                mView.loadAreaListSuccess(mode.getAreaList());
-            }
-
-            @Override
-            public void onFailure(int code, String msg) {
-                mView.showMsg(msg);
-            }
-        }));
-    }
-
-    @Override
-    public void deleteArea(final int position, final AreaBean bean) {
-        Observable<ResponseBody> observable = RetrofitClient.builderRetrofit().create(ApiService.class).deleteArea(bean.getAreaId());
+    public void addArea(final AreaBean areaBean) {
+        Observable<ResponseBody> observable = RetrofitClient.builderRetrofit().create(ApiService.class)
+                .addArea(RequestBody.create(MediaType.parse("application/json; charset=utf-8"), gson.toJson(areaBean)));
         addIOSubscription(observable, new ApiSubscriber(new ApiCallBack() {
 
             @Override
@@ -72,18 +48,42 @@ public class ListAreaActivityPresenter extends CommonPresenter implements ListAr
 
             @Override
             public void onSuccess(Object mode) {
-                mView.deleteAreaSuccess(position, bean);
+                mView.addAreaSuccess(areaBean);
             }
 
             @Override
             public void onFailure(int code, String msg) {
-                mView.deleteAreaFailure();
+                mView.addAreaFailure(areaBean);
             }
         }));
     }
 
     @Override
-    public void updateArea(AreaBean bean) {
+    public void updateArea(final AreaBean areaBean) {
+        Observable<ResponseBody> observable = RetrofitClient.builderRetrofit().create(ApiService.class).updateArea(RequestBody.create(MediaType.parse("application/json; charset=utf-8"), gson.toJson(areaBean)));
+        addIOSubscription(observable, new ApiSubscriber(new ApiCallBack() {
 
+            @Override
+            public void onStart() {
+                super.onStart();
+                mView.showLoadingDialog();
+            }
+
+            @Override
+            public void onCompleted() {
+                super.onCompleted();
+                mView.dismissLoadingDialog();
+            }
+
+            @Override
+            public void onSuccess(Object mode) {
+                mView.updateAreaSuccess(areaBean);
+            }
+
+            @Override
+            public void onFailure(int code, String msg) {
+                mView.updateAreaFailure(areaBean);
+            }
+        }));
     }
 }

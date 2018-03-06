@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.shizhefei.view.viewpager.SViewPager
+            android:id="@+id/viewpager"
+            android:layout_above="@+id/fixedIndicatorView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <com.shizhefei.view.indicator.FixedIndicatorView
+            android:layout_alignParentBottom="true"
+            android:id="@+id/fixedIndicatorView"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#000"/>
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

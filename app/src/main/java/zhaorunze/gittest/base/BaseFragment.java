@@ -1,4 +1,4 @@
-package zhaorunze.gittest.ui.fragment;
+package zhaorunze.gittest.base;
 
 
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 import rx.subscriptions.CompositeSubscription;
-import zhaorunze.gittest.base.BaseView;
 import zhaorunze.gittest.ui.activity.BaseActivity;
 
 /**

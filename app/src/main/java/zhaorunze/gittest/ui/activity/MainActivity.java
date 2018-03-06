@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -15,14 +16,13 @@ import zhaorunze.gittest.AppContext;
 import zhaorunze.gittest.R;
 import zhaorunze.gittest.adapter.ListUserAdapter;
 import zhaorunze.gittest.base.MVPActivity;
-import zhaorunze.gittest.config.Constant;
 import zhaorunze.gittest.contracts.MainActivityContract;
 import zhaorunze.gittest.entity.User;
 import zhaorunze.gittest.presenters.MainActivityPresenter;
 import zhaorunze.gittest.utils.ToastUtils;
 import zhaorunze.gittest.widgets.CircleImageView;
 
-public class MainActivity extends MVPActivity<MainActivityPresenter> implements MainActivityContract.View{
+public class MainActivity extends MVPActivity<MainActivityPresenter> implements MainActivityContract.View {
     @BindView(R.id.etName)
     EditText etName;
     @BindView(R.id.etSex)
@@ -33,6 +33,8 @@ public class MainActivity extends MVPActivity<MainActivityPresenter> implements 
     RecyclerView list;
     @BindView(R.id.imgCircle)
     CircleImageView imgCircle;
+    @BindView(R.id.ivwebp)
+    ImageView ivwebp;
     ListUserAdapter mUserAdapter;
 
     @Override
@@ -44,10 +46,11 @@ public class MainActivity extends MVPActivity<MainActivityPresenter> implements 
     public MainActivityPresenter createPresenter() {
         return new MainActivityPresenter(this);
     }
+
     @Override
     public void initView() {
         mUserAdapter = new ListUserAdapter(null);
-        list.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false));
+        list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         list.setAdapter(mUserAdapter);
         mUserAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
@@ -57,7 +60,8 @@ public class MainActivity extends MVPActivity<MainActivityPresenter> implements 
                 adapter.notifyItemRemoved(position);
             }
         });
-        Glide.with(this).load(Constant.PIC_URL).into(imgCircle);
+        Glide.with(this).load(R.drawable.testwebp).into(ivwebp);
+        Glide.with(this).load("https://pic.zhaoxi.net/images/mycache/2018030610380245511.webp?506172018-03-06%2010:38:03").into(imgCircle);
     }
 
     @Override
@@ -71,17 +75,17 @@ public class MainActivity extends MVPActivity<MainActivityPresenter> implements 
     }
 
     @OnClick(R.id.btAdd)
-    void addUserClick(View view){
-        mPresenter.insertUser(etName.getText().toString().trim(), etSex.getText().toString().trim(),etAge.getText().toString().trim());
+    void addUserClick(View view) {
+        mPresenter.insertUser(etName.getText().toString().trim(), etSex.getText().toString().trim(), etAge.getText().toString().trim());
     }
 
     @OnClick(R.id.btQuery)
-    void queryUserClick(View view){
+    void queryUserClick(View view) {
         mUserAdapter.setNewData(mPresenter.loadAllUser());
     }
 
     @OnClick(R.id.btNext)
-    void nextClick(View view){
+    void nextClick(View view) {
         Intent intent = new Intent(this, NextActivity.class);
         startActivity(intent);
     }

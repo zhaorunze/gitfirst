@@ -1,4 +1,4 @@
-package zhaorunze.gittest.ui.fragment;
+package zhaorunze.gittest.base;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;

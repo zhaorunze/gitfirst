@@ -12,6 +12,7 @@ import java.util.List;
 import butterknife.BindView;
 import zhaorunze.gittest.R;
 import zhaorunze.gittest.adapter.AreaListAdapter;
+import zhaorunze.gittest.base.MVPFragment;
 import zhaorunze.gittest.contracts.ListAreaFragmentContract;
 import zhaorunze.gittest.entity.AreaBean;
 import zhaorunze.gittest.presenters.ListAreaFragmentPresenter;
@@ -22,7 +23,7 @@ import zhaorunze.gittest.presenters.ListAreaFragmentPresenter;
  * E-Mail Address：1159963642@qq.com
  */
 
-public class ListAreaFragment extends  MVPFragment<ListAreaFragmentPresenter> implements ListAreaFragmentContract.View, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.OnItemChildClickListener {
+public class ListAreaFragment extends MVPFragment<ListAreaFragmentPresenter> implements ListAreaFragmentContract.View, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.OnItemChildClickListener {
 
     @BindView(R.id.areaListView)
     RecyclerView areaListView;

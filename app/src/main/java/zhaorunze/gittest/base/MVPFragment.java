@@ -1,9 +1,7 @@
-package zhaorunze.gittest.ui.fragment;
+package zhaorunze.gittest.base;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-
-import zhaorunze.gittest.base.CommonPresenter;
+        import android.os.Bundle;
+        import android.support.annotation.Nullable;
 
 /**
  * Created by zhaorunze on

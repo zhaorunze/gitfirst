@@ -30,7 +30,7 @@ import zhaorunze.gittest.presenters.NextActivityPresenter;
  * E-Mail Address：1159963642@qq.com
  */
 
-public class NextActivity extends MVPActivity<NextActivityPresenter> implements NextActivityContract.View{
+public class NextActivity extends MVPActivity<NextActivityPresenter> implements NextActivityContract.View {
 
     @BindView(R.id.refreshLayout)
     SwipeRefreshLayout refreshLayout;
@@ -41,6 +41,7 @@ public class NextActivity extends MVPActivity<NextActivityPresenter> implements 
     @BindView(R.id.fixedIndicatorView)
     FixedIndicatorView fixedIndicatorView;
     BannerComponent bannerComponent;
+
     @Override
     public int getContent() {
         return R.layout.activity_next;
@@ -52,6 +53,7 @@ public class NextActivity extends MVPActivity<NextActivityPresenter> implements 
     }
 
     Gson gson;
+
     @Override
     public void initData() {
         super.initData();
@@ -67,15 +69,20 @@ public class NextActivity extends MVPActivity<NextActivityPresenter> implements 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                mPresenter.loadGuide();
                 mPresenter.loadAreaList();
             }
         });
     }
 
     @OnClick(R.id.btLoadAreaList)
-    void loadAreaList(View view){
+    void loadAreaList(View view) {
         mPresenter.loadAreaList();
+    }
+
+    @OnClick(R.id.btAreaList)
+    void btAreaList(View view) {
+        Intent intent = new Intent(this, ListAreaActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -90,8 +97,7 @@ public class NextActivity extends MVPActivity<NextActivityPresenter> implements 
     }
 
     @OnClick(R.id.btLoad)
-    void loadGuide(View view){
-//        mPresenter.loadGuide();
+    void loadGuide(View view) {
         Intent intent = new Intent(this, AreaListActivity.class);
         startActivity(intent);
     }

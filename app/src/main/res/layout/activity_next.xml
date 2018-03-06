@@ -60,4 +60,13 @@
         android:layout_marginTop="10dp"
         android:background="#0000"
         android:text="加载Area数据" />
+    <Button
+        android:id="@+id/btAreaList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btLoadAreaList"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:background="#0000"
+        android:text="加载Area数据" />
 </RelativeLayout>

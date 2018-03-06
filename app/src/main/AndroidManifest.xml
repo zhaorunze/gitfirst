@@ -3,6 +3,7 @@
     package="zhaorunze.gittest">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".AppContext"
         android:allowBackup="true"
@@ -22,6 +23,7 @@
         </activity>
         <activity android:name=".ui.activity.NextActivity" />
         <activity android:name=".ui.activity.AreaListActivity" />
+        <activity android:name=".ui.activity.ListAreaActivity"/>
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ import java.util.List;
 
 public class Constant {
 
+    public static final int NET_TIME_OUT = 10;//网络连接超时10秒钟
     public static final int PAGE_SIZE = 10;
     public static final String PIC_URL = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1519453333887&di=8d78af433bc9a310fecec67ccf02df5d&imgtype=0&src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fitem%2F201602%2F23%2F20160223185512_EiwtM.jpeg";
     public static final String LIST_AREA_BG = "http://img5.duitang.com/uploads/item/201312/06/20131206084037_HhWvz.jpeg";

@@ -3,6 +3,7 @@ package zhaorunze.gittest.ui.activity;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -10,8 +11,13 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import zhaorunze.gittest.AppContext;
 import zhaorunze.gittest.R;
 import zhaorunze.gittest.adapter.ListUserAdapter;
@@ -23,6 +29,7 @@ import zhaorunze.gittest.utils.ToastUtils;
 import zhaorunze.gittest.widgets.CircleImageView;
 
 public class MainActivity extends MVPActivity<MainActivityPresenter> implements MainActivityContract.View {
+    private static final String TAG = "MainActivity";
     @BindView(R.id.etName)
     EditText etName;
     @BindView(R.id.etSex)
@@ -61,7 +68,15 @@ public class MainActivity extends MVPActivity<MainActivityPresenter> implements 
             }
         });
         Glide.with(this).load(R.drawable.testwebp).into(ivwebp);
-        Glide.with(this).load("https://pic.zhaoxi.net/images/mycache/2018030610380245511.webp?506172018-03-06%2010:38:03").into(imgCircle);
+        Log.d(TAG, "initView: ================");
+        Observable.timer(1, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Long>() {
+                    @Override
+                    public void call(Long aLong) {
+                        Log.d(TAG, "initView: ================" + Thread.currentThread().getName());
+                        Glide.with(MainActivity.this).load("https://pic.zhaoxi.net/images/mycache/2018030610380245511.webp?506172018-03-06%2010:38:03").into(imgCircle);
+                    }
+                });
     }
 
     @Override

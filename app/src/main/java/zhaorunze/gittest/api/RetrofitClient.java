@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.security.KeyStore;
 import java.security.SecureRandom;
 import java.security.cert.CertificateFactory;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -91,6 +92,7 @@ public class RetrofitClient {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(logging);
+        httpClient.connectTimeout(Constant.NET_TIME_OUT, TimeUnit.SECONDS);
         httpClient.addNetworkInterceptor(requestParamInterceptor);
 
         /*int[] certificates = new int[] {R.raw.app_key};

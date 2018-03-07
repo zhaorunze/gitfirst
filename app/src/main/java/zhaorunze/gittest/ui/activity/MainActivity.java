@@ -1,6 +1,8 @@
 package zhaorunze.gittest.ui.activity;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -67,6 +69,9 @@ public class MainActivity extends MVPActivity<MainActivityPresenter> implements 
                 adapter.notifyItemRemoved(position);
             }
         });
+
+        FragmentPagerAdapter fragmentPagerAdapter;
+        FragmentStatePagerAdapter fragmentStatePagerAdapter;
         Glide.with(this).load(R.drawable.testwebp).into(ivwebp);
         Log.d(TAG, "initView: ================");
         Observable.timer(1, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread())

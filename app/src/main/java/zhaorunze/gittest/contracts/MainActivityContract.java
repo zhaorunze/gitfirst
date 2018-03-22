@@ -4,6 +4,7 @@ import java.util.List;
 
 import zhaorunze.gittest.base.BasePresenter;
 import zhaorunze.gittest.base.BaseView;
+import zhaorunze.gittest.entity.AreaBean;
 import zhaorunze.gittest.entity.User;
 
 /**
@@ -17,9 +18,12 @@ public interface MainActivityContract {
     interface View extends BaseView{
         void insertUserFailure(String msg);
         void insertUserSuccess(User user);
+        void insertUseresFailure(User user);
+        void insertUseresSuccess(User user);
     }
     interface Presenter extends BasePresenter{
         void insertUser(String name, String sex, String age);
         List<User> loadAllUser();
+        void insertUseres(List<User> userData,List<User> homeData);
     }
 }

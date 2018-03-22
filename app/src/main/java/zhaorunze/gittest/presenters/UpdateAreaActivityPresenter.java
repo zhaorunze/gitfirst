@@ -23,7 +23,6 @@ import zhaorunze.gittest.entity.ResponseBody;
 
 public class UpdateAreaActivityPresenter extends CommonPresenter implements UpdateAreaActivityContract.Presenter {
 
-    private Gson gson = new GsonBuilder().create();
     private UpdateAreaActivityContract.View mView;
     public UpdateAreaActivityPresenter(UpdateAreaActivityContract.View mView){
         this.mView = mView;
@@ -31,7 +30,7 @@ public class UpdateAreaActivityPresenter extends CommonPresenter implements Upda
     @Override
     public void addArea(final AreaBean areaBean) {
         Observable<ResponseBody> observable = RetrofitClient.builderRetrofit().create(ApiService.class)
-                .addArea(RequestBody.create(MediaType.parse("application/json; charset=utf-8"), gson.toJson(areaBean)));
+                .addArea(createBody(areaBean));
         addIOSubscription(observable, new ApiSubscriber(new ApiCallBack() {
 
             @Override

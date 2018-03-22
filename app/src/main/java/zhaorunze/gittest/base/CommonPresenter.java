@@ -1,5 +1,10 @@
 package zhaorunze.gittest.base;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -13,7 +18,10 @@ import rx.subscriptions.CompositeSubscription;
  */
 
 public class CommonPresenter implements BasePresenter {
-
+    public Gson gson = new GsonBuilder().create();
+    public RequestBody createBody(Object bean){
+        return RequestBody.create(MediaType.parse("application/json; charset=utf-8"), gson.toJson(bean));
+    }
     protected CompositeSubscription compositeSubscription;
 
     public void attachView(){

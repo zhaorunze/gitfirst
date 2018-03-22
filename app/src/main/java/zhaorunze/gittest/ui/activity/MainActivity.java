@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -87,6 +89,37 @@ public class MainActivity extends MVPActivity<MainActivityPresenter> implements 
     @Override
     public void insertUserSuccess(User user) {
 
+    }
+
+    int index = 0;
+    @OnClick(R.id.ivwebp)
+    void testivwebp(View view){
+        List<User> userData = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            index ++;
+            User userItem = new User();
+            userItem.setName("userData:" + index);
+            userData.add(userItem);
+        }
+
+        List<User> homeData = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            index ++;
+            User userItem = new User();
+            userItem.setName("homeData:" + index);
+            homeData.add(userItem);
+        }
+        mPresenter.insertUseres(userData, homeData);
+    }
+
+    @Override
+    public void insertUseresFailure(User user) {
+        Log.d(TAG, "insertUseresFailure: ===" + user);
+    }
+
+    @Override
+    public void insertUseresSuccess(User user) {
+        Log.d(TAG, "insertUseresSuccess: ===" + user);
     }
 
     @OnClick(R.id.btAdd)

@@ -9,6 +9,7 @@ import rx.Observable;
 import zhaorunze.gittest.entity.AreaListBean;
 import zhaorunze.gittest.entity.GuideBean;
 import zhaorunze.gittest.entity.ResponseBody;
+import zhaorunze.gittest.entity.User;
 
 /**
  * Created by zhaorunze on
@@ -32,4 +33,6 @@ public interface ApiService {
 
     @POST("superadmin/modifyarea")
     Observable<ResponseBody> updateArea(@Body RequestBody body);
+    @POST("hello")
+    Observable<ResponseBody<User>> addUser(@Body RequestBody body);
 }
